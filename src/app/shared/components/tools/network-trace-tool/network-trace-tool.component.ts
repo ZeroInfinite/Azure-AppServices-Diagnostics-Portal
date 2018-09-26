@@ -94,7 +94,6 @@ export class NetworkTraceToolComponent implements OnInit {
                 })
             }
         }, error => {
-            console.log(error);
             if (error.status != null && (error.status === 400 || error.status === 403 || error.status === 409)) {
                 let errorMsg = this.getErrorMessage(error);
                 if (errorMsg.toLowerCase().indexOf('OperationName: CaptureNetworkTrace'.toLowerCase()) > -1 || errorMsg.toLowerCase().indexOf('OperationName: NetworkTrace'.toLowerCase()) > -1) {
