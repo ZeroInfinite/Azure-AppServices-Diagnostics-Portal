@@ -25,7 +25,7 @@ export class NetworkTraceToolComponent implements OnInit {
     supportedTier: boolean = false;
     checkingValidity: boolean = true;
     siteToBeDiagnosed: SiteInfoMetaData;
-    files: any[] = [];    
+    files: any[] = [];
     armOperationStatus: string = "";
     subscriptionOperationStatus: Subscription;
     subscriptionTimer: Subscription;
@@ -43,13 +43,13 @@ export class NetworkTraceToolComponent implements OnInit {
     }
     ngOnInit(): void {
         this.scmPath = this._siteService.currentSiteStatic.enabledHostNames.find(hostname => hostname.indexOf('.scm.') > 0);
-        
+
         this._serverFarmService.siteServerFarm.subscribe(serverFarm => {
             if (serverFarm) {
                 // Specifically not checking for Isolated as Network Trace tool is not working on ASE currently
                 if (serverFarm.sku.tier === "Standard" || serverFarm.sku.tier === "Basic" || serverFarm.sku.tier.indexOf("Premium") > -1) {
                     this.supportedTier = true;
-                    
+
                     this._siteService.getSiteAppSettings(this.siteToBeDiagnosed.subscriptionId, this.siteToBeDiagnosed.resourceGroupName, this.siteToBeDiagnosed.siteName, this.siteToBeDiagnosed.slot).subscribe(settingsResponse => {
                         if (settingsResponse && settingsResponse.properties) {
                             if (settingsResponse.properties["WEBSITE_LOCAL_CACHE_OPTION"]) {
@@ -141,7 +141,7 @@ export class NetworkTraceToolComponent implements OnInit {
                         if (output.properties != null) {
                             output.properties.forEach(element => {
                                 if (element.status.toLowerCase() === "Succeeded".toLowerCase()) {
-                                    this.files.push({name: element.path, url:this.getHttpPathFromFileName(element.path)});
+                                    this.files.push({ name: element.path, url: this.getHttpPathFromFileName(element.path) });
                                 }
                             });
                         }
